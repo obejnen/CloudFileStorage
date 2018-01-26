@@ -10,10 +10,13 @@ class Folder < ApplicationRecord
     # after_create_commit { RenderCommentJob.perform_later self }
 
     def get_path(folder)
-        unless folder.parent
-            return folder.owner.username
+        path = ""
+        while folder
+            temp_path = "<a href='/folders/#{folder.id}'>#{folder.name}</a>"
+            path = path == "" ? temp_path : temp_path + " / #{path}"
+            folder = folder.parent
         end
-        return "#{get_path(folder.parent)}/#{folder.name}"
+        return path
     end
 
 end

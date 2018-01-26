@@ -1,5 +1,5 @@
 <%= render "form" %>
 <div>
-    <%= @folder.get_path(@folder) %>
+    <%= @folder.get_path(@folder).to_s.html_safe %>
 </div>
 <%= render "/files/files_table" %>
