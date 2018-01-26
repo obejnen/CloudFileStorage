@@ -1,17 +1,17 @@
 class FoldersController < ApplicationController
-    before_action :set_folder, only: [:show, :create, :new]
-    before_action :set_files, only: [:show]
+    before_action :set_folder, only: [:show, :create, :new, :index]
+    before_action :set_files, only: [:show, :index]
 
     def create
         @folder.folders.create(folder_params)
     end
 
     def index
-        @folders_search = current_user.own_folders.ransack(params[:q])
-        @folders = @folders_search.result
+        # @folders_search = current_user.own_folders.ransack(params[:q])
+        # @folders = @folders_search.result
 
-        @items_search = current_user.own_items.ransack(params[:q])
-        @items = @items_search.result
+        # @items_search = current_user.own_items.ransack(params[:q])
+        # @items = @items_search.result
     end
 
     def show

@@ -3,7 +3,7 @@ class Folder < ApplicationRecord
     has_many :folder_shares
     has_many :users, through: :folder_shares
     belongs_to :owner, class_name: "User", foreign_key: "user_id"
-    belongs_to :parent, class_name: "Folder", foreign_key: "parent_id"
+    has_one :parent, class_name: "Folder", foreign_key: "parent_id"
     has_many :folders
     has_many :items
 
@@ -14,9 +14,13 @@ class Folder < ApplicationRecord
         while folder
             temp_path = "<a href='/folders/#{folder.id}'>#{folder.name}</a>"
             path = path == "" ? temp_path : temp_path + " / #{path}"
-            folder = folder.parent
+            folder = folder.get_parent
         end
         return path
+    end
+
+    def get_parent
+        return self.parent_id ? Folder.find(self.parent_id) : nil
     end
 
 end
