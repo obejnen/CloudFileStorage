@@ -28,7 +28,7 @@ class FoldersController < ApplicationController
     private
 
     def folder_params
-        params.require(:folder).permit(:name).merge(user_id: current_user.id)
+        params.require(:folder).permit(:name).merge(user_id: current_user.id, parent_id: @folder.id)
     end
 
     def set_files

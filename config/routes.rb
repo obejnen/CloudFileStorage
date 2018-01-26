@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root "folders#show"
   resources :folders do
     resources :folders
+    resources :items
   end
   mount ActionCable.server => '/cable'
 
