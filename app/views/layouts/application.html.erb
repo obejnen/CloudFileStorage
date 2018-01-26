@@ -4,13 +4,13 @@
 <head>
   <title>File Storage</title>
   <%= csrf_meta_tags %>
-    <%= action_cable_meta_tag %>
+  <%= action_cable_meta_tag %>
 
-      <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-        <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body class="base-<%= @color %>">
@@ -25,7 +25,7 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li>
-            <a href="#">My files</a>
+            <%= link_to "My files", "/files" %>
           </li>
           <li>
             <a href="#">Shared with me</a>
@@ -48,6 +48,7 @@
       </div>
     </div>
   </nav>
+  <%= render "/folders/header" %>
   <%= yield %>
 </body>
 

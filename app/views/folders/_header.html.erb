@@ -1,0 +1,16 @@
+<div class="header">
+    <button id="new_folder_btn" onclick="openForm()">New folder</button>
+</div>
+<script>
+    var position = $("#new_folder_btn").position
+
+    function openForm() {
+        document.getElementById("myNav").style.position = position;
+        document.getElementById("myNav").style.display = "block";
+    }
+
+    /* Close */
+    function closeForm() {
+        document.getElementById("myNav").style.display = "none";
+    }
+</script>

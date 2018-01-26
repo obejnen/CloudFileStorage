@@ -1,0 +1,20 @@
+<table class="table" id="categoriesTable">
+    <tr>
+        <th><%= sort_link @folders_search, :name, "Name" %></th>
+    </tr>
+    <% @folders.each do |folder| %>
+    <tr>
+        <td>
+            <%= link_to folder.name, folder_path(folder) %>
+        </td>
+    </tr>
+    <% end %>
+    
+    <% @items.each do |item| %>
+    <tr>
+        <td>
+            <%= item.name %>
+        </td>
+    </tr>
+    <% end %>
+</table>

@@ -1,0 +1,42 @@
+.overlay {
+    display: none;
+    height: 80px;
+    width: 300px;
+    position: fixed;
+    margin-left: 20px;
+    z-index: 1;
+    background-color: rgba(255,255,255, 0.7);
+    border: 1px solid rgba(0,0,0, 0.2);
+    border-radius: 5px;
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.name-input {
+    width: 200px;
+    height: 34px;
+    border: 1px solid rgba(0,0,0, 1);
+    border-radius: 5px;
+}
+
+.overlay-content {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin-top: 25px;
+}
+
+.overlay .closebtn {
+    position: absolute;
+    right: 5px;
+    font-size: 20px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+    font-size: 20px;
+    top: 15px;
+    right: 35px;
+  }
+}
