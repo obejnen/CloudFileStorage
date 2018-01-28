@@ -1,0 +1,9 @@
+<div id="myNav" class="overlay">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeForm()">&times;</a>
+    <div class="overlay-content">
+        <%= form_for [@item, Item.new] do |f| %>
+            <%= f.file_field :file, multiple: true %>
+            <%= f.submit "Create", class: 'btn btn-primary', onclick: "closeForm()" %>
+        <% end %>
+    </div>
+</div>

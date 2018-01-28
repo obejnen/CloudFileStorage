@@ -1,20 +1,19 @@
 class FoldersController < ApplicationController
     before_action :set_folder, only: [:show, :create, :new, :index]
-    before_action :set_files, only: [:show, :index]
+    before_action :set_items, only: [:show, :index]
+    before_action :set_shared, only: [:show_shared]
 
     def create
         @folder.folders.create(folder_params)
     end
 
     def index
-        # @folders_search = current_user.own_folders.ransack(params[:q])
-        # @folders = @folders_search.result
-
-        # @items_search = current_user.own_items.ransack(params[:q])
-        # @items = @items_search.result
     end
 
     def show
+    end
+
+    def show_shared
     end
 
     def show_root_folder
@@ -27,11 +26,19 @@ class FoldersController < ApplicationController
 
     private
 
+    def set_shared
+        @folders_search = current_user.folders.ransack(params[:q])
+        @folders = @folders_search.result
+
+        @items_search = current_user.items.ransack(params[:q])
+        @items = @items_search.result
+    end
+
     def folder_params
         params.require(:folder).permit(:name).merge(user_id: current_user.id, parent_id: @folder.id)
     end
 
-    def set_files
+    def set_items
         @folders_search = @folder.folders.ransack(params[:q])
         @folders = @folders_search.result
 

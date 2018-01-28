@@ -1,0 +1,9 @@
+development:
+  cloud_name: "obejnenfilestorage"
+  api_key: "332371974872138"
+  api_secret: "3iIN0YEBhG28xt-gAKmHiU9Fzdk"
+
+production:
+  cloud_name: "obejnenfilestorage"
+  api_key: "332371974872138"
+  api_secret: "3iIN0YEBhG28xt-gAKmHiU9Fzdk"
