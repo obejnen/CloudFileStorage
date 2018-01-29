@@ -1,9 +1,35 @@
-<div id="myNav" class="overlay">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeForm()">&times;</a>
-    <div class="overlay-content">
-        <%= form_for [@item, Item.new] do |f| %>
-            <%= f.file_field :file, multiple: true %>
-            <%= f.submit "Create", class: 'btn btn-primary', onclick: "closeForm()" %>
-        <% end %>
+<div class="items-form">
+    <%= form_for [@folder, @item, Item.new] do |f| %>
+        <%= f.file_field :file, multiple: true, class: "file-field" %>    
+        <%= f.submit "Create", class: 'btn btn-primary submit', onclick: "closeItemForm()" %>        
+    <% end %>    
+    <div id="files2upload" class="overlay-file">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeItemForm()">&times;</a>
+        <div class="overlay-file-content" id="files"></div>
     </div>
 </div>
+<script>
+    $("#item_file").on("change", function(){
+        openItemForm();
+        var files = $("#item_file")[0].files;
+        var length = files.length;
+        $("#files").empty();
+        length > 1 ? $("#files").height(files.length*24) : $("#files").height(30)
+        length > 1 ? $("#files2upload").height(files.length*24) : $("#files2upload").height(30)        
+        for(i = 0; i < files.length; i++){
+            $("#files").append("<div id='file" + i + "'>" + files[i].name + "</div>");
+        }
+    });
+
+    function openItemForm() {
+        document.getElementById("files2upload").style.position = $("#item_file").position;
+        document.getElementById("files2upload").style.display = "block";
+    }
+
+    function closeItemForm() {
+        document.getElementById("files2upload").style.display = "none";
+        //var $el = $('#item_file');
+        //$el.wrap('<form>').closest('form').get(0).reset();
+        //$el.unwrap();
+    }
+</script>

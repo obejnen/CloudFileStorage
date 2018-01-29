@@ -19,18 +19,6 @@
     border-radius: 5px;
 }
 
-.overlay-content {
-    position: relative;
-    width: 100%;
-    text-align: center;
-    margin-top: 25px;
-}
-
-.overlay .closebtn {
-    position: absolute;
-    right: 5px;
-    font-size: 20px;
-}
 
 @media screen and (max-height: 450px) {
   .overlay a {font-size: 20px}

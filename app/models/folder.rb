@@ -1,4 +1,5 @@
 class Folder < ApplicationRecord
+    after_create_commit { RenderFolderJob.perform_later self }
     # belongs_to :owner, class_name: "User", foreign_key: "user_id"
     has_many :folder_shares
     has_many :users, through: :folder_shares
@@ -7,7 +8,6 @@ class Folder < ApplicationRecord
     has_many :folders
     has_many :items
 
-    # after_create_commit { RenderCommentJob.perform_later self }
 
     def get_path(folder)
         path = ""

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get "folders/shared", to: "folders#show_shared"
   resources :folders do
     resources :folders
-    # resources :items
+    resources :items
   end
   resources :items
   mount ActionCable.server => '/cable'

@@ -1,9 +1,12 @@
 class FoldersController < ApplicationController
-    before_action :set_folder, only: [:show, :create, :new, :index]
-    before_action :set_items, only: [:show, :index]
+    before_action :set_folder #, only: [:show, :create, :new, :index]
+    before_action :set_items
     before_action :set_shared, only: [:show_shared]
 
     def create
+        # new_folder = Folder.new(folder_params)
+        # new_folder.parent = @folder
+        # @folder.folders << new_folder
         @folder.folders.create(folder_params)
     end
 

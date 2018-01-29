@@ -10,7 +10,12 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery
+//= require jquery-ui
+//= require jquery.turbolinks
 //= require rails-ujs
 //= require bootstrap-sprockets
-//= require turbolinks
+// require turbolinks
 //= require_tree .
+
+$.turbo.use('turbolinks:load', 'turbolinks:request-start')

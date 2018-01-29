@@ -1,0 +1,7 @@
+<table class="table" id="items_table" data-folder-id="<%= @folder.id %>">
+        <tr>
+            <th><%= sort_link @folders_search, :name, "Name" %></th>
+        </tr>
+        <%= render @folders %>
+        <%= render @items %>
+</table>
