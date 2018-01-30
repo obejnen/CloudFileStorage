@@ -11,8 +11,8 @@ class Folder < ApplicationRecord
     def get_path(folder)
         path = ""
         while folder
-            temp_path = "<a href='/folders/#{folder.id}'>#{folder.name}</a>"
-            path = path == "" ? temp_path : temp_path + " / #{path}"
+            temp_path = "<span class='path-link'><a href='/folders/#{folder.id}'>#{folder.name}</a></span>"
+            path = path == "" ? temp_path : temp_path + " &rarr; #{path}"
             folder = folder.get_parent
         end
         return path

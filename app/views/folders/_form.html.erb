@@ -1,9 +1,11 @@
-<div id="myNav" class="overlay">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeForm()">&times;</a>
-    <div class="overlay-content">
-        <%= form_for [@folder, Folder.new], remote: true do |f| %>
-            <%= f.text_field :name, class: 'name-input' %>
-            <%= f.submit "Create", class: 'btn btn-primary', onclick: "closeForm()" %>
+<div id="folder-form" class="overlay">
+    <div class="closebtn">
+        <a href="#" class="closebtn" onclick="closeFolderForm()">&times;</a>
+    </div>
+    <div class="form-content">
+        <%= form_for [@folder, Folder.new], remote: true, html: { class: "form-inline" } do |f| %>
+            <%= f.text_field :name, class: 'form-control', placeholder: "Folder name" %>
+            <%= f.submit "Create", class: 'btn btn-primary', onclick: "closeFolderForm()" %>
         <% end %>
     </div>
 </div>
