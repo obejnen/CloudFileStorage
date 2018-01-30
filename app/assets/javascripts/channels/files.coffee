@@ -1,16 +1,12 @@
-App.folders = App.cable.subscriptions.create "FoldersChannel",
-  # connected: ->
-    # Called when the subscription is ready for use on the server
+App.files = App.cable.subscriptions.create "FilesChannel",
   connected: ->
     setTimeout =>
       @followCurrentFolder()
     , 1000
 
   disconnected: ->
-    # Called when the subscription has been terminated by the server
 
   speak: (folder) ->
-    alert(folder)
     @perform 'speak', folder: folder
 
   collection: -> $('#items_table')
@@ -24,5 +20,5 @@ App.folders = App.cable.subscriptions.create "FoldersChannel",
       @perform 'unfollow'
 
   received: (data) ->
-    alert(data['folder'])
+    alert data['folder']
     @collection().append(data['folder'])
