@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
     before_action :parse_files, only: [:create]
-    before_action :set_folder, only: [:create]
+    before_action :set_folder
+    before_action :set_items
     
     def create
         files = params.require(:item).permit(file: [])[:file]
@@ -18,6 +19,14 @@ class ItemsController < ApplicationController
     def item_params
         # @name = params.require(:item).require(:file).original_filename
         params.require(:item).permit(:file).merge(user_id: current_user.id, folder_id: @folder.id, name: @name)
+    end
+
+    def set_items
+        @folders_search = @folder.folders.ransack(params[:q])
+        @folders = @folders_search.result
+
+        @items_search = @folder.items.ransack(params[:q])
+        @items = @items_search.result
     end
 
     def set_folder

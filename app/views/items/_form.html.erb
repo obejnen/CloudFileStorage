@@ -1,5 +1,5 @@
 <div class="items-form">
-    <%= form_for [@folder, @item, Item.new] do |f| %>
+    <%= form_for [@folder, @item, Item.new], remote: true do |f| %>
         <%= f.file_field :file, multiple: true, class: "file-field" %>    
         <%= f.submit "Create", class: 'btn btn-primary submit', onclick: "closeItemForm()" %>        
     <% end %>    
