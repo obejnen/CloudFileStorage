@@ -9,7 +9,14 @@ function openFolderForm() {
 
 function closeFolderForm() {
     $("#folder-form").css({ display: "none" });
-    $("#new_folder")[0].reset();
+}
+
+function resetFolderForm() {
+    $("#new_folder")[0].reset();    
+}
+
+function resetItemForm() {
+    $("#new_item")[0].reset();    
 }
 
 $("#item_file").on("change", function(){

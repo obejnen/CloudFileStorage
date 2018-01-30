@@ -4,7 +4,7 @@
         <%= f.submit "Create", class: 'btn btn-primary submit', onclick: "closeItemForm()" %>        
     <% end %>    
     <div id="files2upload" class="overlay-file">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeItemForm()">&times;</a>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeItemForm(); resetFolderForm();">&times;</a>
         <div class="overlay-file-content" id="files"></div>
     </div>
 </div>

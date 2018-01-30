@@ -1,11 +1,11 @@
 <div id="folder-form" class="overlay">
     <div class="closebtn">
-        <a href="#" class="closebtn" onclick="closeFolderForm()">&times;</a>
+        <a href="#" class="closebtn" onclick="closeFolderForm(); resetFolderForm();">&times;</a>
     </div>
     <div class="form-content">
         <%= form_for [@folder, Folder.new], remote: true, html: { class: "form-inline" } do |f| %>
             <%= f.text_field :name, class: 'form-control', placeholder: "Folder name" %>
-            <%= f.submit "Create", class: 'btn btn-primary', onclick: "closeFolderForm()" %>
+            <%= f.submit "Create", class: 'btn btn-primary', onclick: "closeFolderForm();" %>
         <% end %>
     </div>
 </div>

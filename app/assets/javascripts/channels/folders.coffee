@@ -1,5 +1,5 @@
 App.folders = App.cable.subscriptions.create "FoldersChannel",
-  collection: -> $('#items_table')
+  collection: -> $('#folders_table')
 
   connected: ->
     setTimeout =>
