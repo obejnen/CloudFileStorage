@@ -1,6 +1,5 @@
 class Folder < ApplicationRecord
-    after_create_commit { RenderFolderJob.perform_later self }
-    # belongs_to :owner, class_name: "User", foreign_key: "user_id"
+    after_create_commit { RenderFoldersJob.perform_later self }
     has_many :folder_shares
     has_many :users, through: :folder_shares
     belongs_to :owner, class_name: "User", foreign_key: "user_id"
