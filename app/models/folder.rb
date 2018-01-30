@@ -18,6 +18,15 @@ class Folder < ApplicationRecord
         return path
     end
 
+    def get_hash_path(folder)
+        hash_path = Hash.new
+        while folder
+            hash_path[folder.name] = folder.id
+            folder = folder.get_parent
+        end
+        return hash_path
+    end
+
     def get_parent
         return self.parent_id ? Folder.find(self.parent_id) : nil
     end

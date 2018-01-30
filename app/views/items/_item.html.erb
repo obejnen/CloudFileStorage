@@ -1,5 +1,16 @@
-<tr>
-    <td>
-        <%= item.name %>
-    </td>
-</tr>
+<% cache item do %>
+    <tr class="clickable-table-row item-row" data-href="#">
+        <td class="icon-column">
+            <span class="glyphicon glyphicon-file"></span>
+        </td>
+        <td class="name-column">
+            <%= item.name %>
+        </td>
+        <td class="owner-column">
+            <%= item.owner.username %>
+        </td>
+        <td class="date-column">
+            <%= item.created_at.strftime('%d %B %Y') %>
+        </td>
+    </tr>
+<% end %>

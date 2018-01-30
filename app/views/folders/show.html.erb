@@ -1,6 +1,9 @@
 <%= render "form" %>
 <%= render "/items/form" %>
 <div>
-    <%= @folder.get_path(@folder).to_s.html_safe %>
+    <%= @folder.get_path(@folder).to_s.html_safe %><br>
+    <% @folder.get_hash_path(@folder).each do |name, id| %>
+        <%= name %> : <%= id %><br>
+    <% end %> 
 </div>
 <%= render "folders" %>

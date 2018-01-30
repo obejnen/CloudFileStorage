@@ -1,0 +1,36 @@
+table.files-table
+    a
+        text-decoration: none!important
+        cursor: pointer
+        color: #000
+    thead
+        background-color: #c4ffc8
+        td[class*="clickable-table-"]
+            font-weight: bold
+            &:hover
+                background-color: #c3c3c3
+                cursor: pointer
+            
+    margin-bottom: 0px
+    tbody
+        color: #000
+        tr.folder-row
+            background-color: #f2f2f2
+            td.name-column
+                font-size: 17px
+                font-family: "Courier New"
+        tr.item-row
+            background-color: #ffffff
+        tr
+            &:hover
+                background-color: #cecece
+                cursor: pointer
+            td.icon-column
+                width: 30px
+            td.name-column
+                width: 40%
+            td.owner-column
+                width: 20%
+            td.date-column
+                width: 30%
+            td

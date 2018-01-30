@@ -19,3 +19,12 @@
 //= require_tree .
 
 $.turbo.use('turbolinks:load', 'turbolinks:request-start')
+
+$(document).ready(function($) {
+    $(".clickable-table-row").click(function() {
+        window.document.location = $(this).data("href");
+    });
+    $(".clickable-table-column").click(function() {
+        window.document.location = $(this).children().attr("href");
+    });
+});

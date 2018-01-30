@@ -1,7 +1,18 @@
-<table class="table" id="items_table" data-folder-id="<%= @folder.id %>">
+<table class="table files-table" id="items_Table">
+    <thead>
         <tr>
-            <th><%= sort_link @folders_search, :name, "Name" %></th>
+            <td id="icon-column"></td>
+            <td class="clickable-table-column"><%= sort_link @folders_search, :name, "Name" %></td>
+            <td class="clickable-table-column"><%= sort_link @folders_search, :owner_username, "Created by" %></td>
+            <td class="clickable-table-column"><%= sort_link @folders_search, :created_at, "Created at" %></td>
         </tr>
+    </thead>
+    <tbody>
         <%= render @folders %>
+    </tbody>
+</table>
+<table class="table files-table" id="items_table">
+    <tbody>
         <%= render @items %>
+    </tbody>
 </table>
