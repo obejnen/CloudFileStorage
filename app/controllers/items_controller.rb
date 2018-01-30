@@ -3,10 +3,20 @@ class ItemsController < ApplicationController
     before_action :set_folder
     before_action :set_items
     
+    # def create
+    #     files = params.require(:item).permit(file: [])[:file]
+    #     files.each do |file|
+    #         @folder.items.create(name: file.original_filename, user_id: current_user.id, folder_id: @folder.id, file: file)
+    #     end
+    # end
+
     def create
-        files = params.require(:item).permit(file: [])[:file]
-        files.each do |file|
-            @folder.items.create(name: file.original_filename, user_id: current_user.id, folder_id: @folder.id, file: file)
+        @filename = params[:file].original_filename
+        @item = Item.new(file: params[:file], user_id: current_user.id, folder_id: @folder.id, name: @filename)
+        if @item.save!
+            respond_to do |format|
+                format.json{ render :json => @item }
+            end
         end
     end
 

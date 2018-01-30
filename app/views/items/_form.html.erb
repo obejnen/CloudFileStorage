@@ -1,13 +1,27 @@
 <div class="items-form">
-    <%= form_for [@folder, @item, Item.new], remote: true do |f| %>
-        <%= f.file_field :file, multiple: true, class: "file-field" %>    
-        <%= f.submit "Create", class: 'btn btn-primary submit', onclick: "closeItemForm()" %>        
-    <% end %>    
-    <div id="files2upload" class="overlay-file">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeItemForm(); resetFolderForm();">&times;</a>
-        <div class="overlay-file-content" id="files"></div>
-    </div>
+    <%= form_tag "/folders/#{@folder.id}/items", method: :post, class: "dropzone", id: "item-dropzone" do %>
+        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+        <div class="fallback">
+          <%= file_field_tag "item", multiple: true %>
+        </div>
+      <% end %>
+    <%#= form_for [@folder, @item, Item.new], html: { class: "dropzone", id: "item-dropzone" }, remote: true do |f| %>
+        <%#= f.file_field :file, multiple: true, class: "file-field" %>
+        <!-- <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" /> -->
+        <!-- <div class="fallback"> -->
+            <%#= file_field_tag "item", multiple: true%>
+        <!-- </div> -->
+        <%#= f.submit "Create", class: 'btn btn-primary submit', onclick: "closeItemForm()" %>        
+    <%# end %>    
 </div>
+
 <script>
-    
+    $(function() {
+        var mediaDropzone;
+        mediaDropzone = new Dropzone("#item-dropzone");
+        return mediaDropzone.on("success", function(file, responseText) {
+            var imageUrl;
+            imageUrl = responseText.file_name.url;
+        });
+        });
 </script>

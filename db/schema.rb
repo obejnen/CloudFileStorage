@@ -12,16 +12,16 @@
 
 ActiveRecord::Schema.define(version: 20180128102827) do
 
-  create_table "folder_shares", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "folder_id"
+  create_table "folder_shares", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.bigint "folder_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["folder_id"], name: "index_folder_shares_on_folder_id"
     t.index ["user_id"], name: "index_folder_shares_on_user_id"
   end
 
-  create_table "folders", force: :cascade do |t|
+  create_table "folders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -33,16 +33,16 @@ ActiveRecord::Schema.define(version: 20180128102827) do
     t.index ["user_id"], name: "index_folders_on_user_id"
   end
 
-  create_table "item_shares", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "item_id"
+  create_table "item_shares", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.bigint "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_item_shares_on_item_id"
     t.index ["user_id"], name: "index_item_shares_on_user_id"
   end
 
-  create_table "items", force: :cascade do |t|
+  create_table "items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20180128102827) do
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -72,4 +72,8 @@ ActiveRecord::Schema.define(version: 20180128102827) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "folder_shares", "folders"
+  add_foreign_key "folder_shares", "users"
+  add_foreign_key "item_shares", "items"
+  add_foreign_key "item_shares", "users"
 end

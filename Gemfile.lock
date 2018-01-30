@@ -84,6 +84,8 @@ GEM
       warden (~> 1.2.3)
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
+    dropzonejs-rails (0.8.2)
+      rails (> 3.1)
     erubi (1.7.0)
     execjs (2.7.0)
     ffi (1.9.18)
@@ -122,6 +124,7 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.11.1)
     multi_json (1.13.1)
+    mysql2 (0.4.10)
     netrc (0.11.0)
     nio4r (2.2.0)
     nokogiri (1.8.1)
@@ -241,11 +244,13 @@ DEPENDENCIES
   cloudinary
   coffee-rails (~> 4.2)
   devise
+  dropzonejs-rails
   jbuilder (~> 2.5)
   jquery-rails
   jquery-turbolinks
   jquery-ui-rails
   listen (>= 3.0.5, < 3.2)
+  mysql2
   puma (~> 3.7)
   rails (~> 5.1.4)
   ransack
