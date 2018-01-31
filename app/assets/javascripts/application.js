@@ -23,6 +23,7 @@ $.turbo.use('turbolinks:load', 'turbolinks:request-start')
 
 $(document).ready(function(){
     makeRowsLinked();
+    changeDropZoneHieght();
 });
 
 function makeRowsLinked() {

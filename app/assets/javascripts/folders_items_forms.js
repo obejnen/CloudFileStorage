@@ -39,3 +39,10 @@ function openItemForm() {
 function closeItemForm() {
     document.getElementById("files2upload").style.display = "none";
 }
+
+$('.tables').bind("DOMSubtreeModified", changeDropZoneHieght());
+
+function changeDropZoneHieght(){
+    var tablesHeight = $(".tables").height();
+    tablesHeight >= $(window).height() ? $('.items-form').height(tablesHeight) : $('.items-form').height('85%');
+}
