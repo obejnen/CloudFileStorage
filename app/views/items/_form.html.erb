@@ -1,27 +1,8 @@
 <div class="items-form">
-    <%= form_tag "/folders/#{@folder.id}/items", method: :post, class: "dropzone", id: "item-dropzone" do %>
+    <%= form_for [@folder, @item, Item.new], html: { class: "dropzone", id: "item-dropzone" }, remote: true do |f| %>
         <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
         <div class="fallback">
-          <%= file_field_tag "item", multiple: true %>
+            <%= f.file_field :file, multiple: true %>
         </div>
-      <% end %>
-    <%#= form_for [@folder, @item, Item.new], html: { class: "dropzone", id: "item-dropzone" }, remote: true do |f| %>
-        <%#= f.file_field :file, multiple: true, class: "file-field" %>
-        <!-- <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" /> -->
-        <!-- <div class="fallback"> -->
-            <%#= file_field_tag "item", multiple: true%>
-        <!-- </div> -->
-        <%#= f.submit "Create", class: 'btn btn-primary submit', onclick: "closeItemForm()" %>        
-    <%# end %>    
+    <% end %>    
 </div>
-
-<script>
-    $(function() {
-        var mediaDropzone;
-        mediaDropzone = new Dropzone("#item-dropzone");
-        return mediaDropzone.on("success", function(file, responseText) {
-            var imageUrl;
-            imageUrl = responseText.file_name.url;
-        });
-        });
-</script>

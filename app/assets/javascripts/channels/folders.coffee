@@ -16,4 +16,4 @@ App.folders = App.cable.subscriptions.create "FoldersChannel",
       @perform 'unfollow'
 
   received: (data) ->
-    @collection().children().append(data['new_folder'])
+    @collection().children("tbody").append(data['new_folder'])

@@ -21,11 +21,15 @@
 
 $.turbo.use('turbolinks:load', 'turbolinks:request-start')
 
-$(document).ready(function($) {
+$(document).ready(function(){
+    makeRowsLinked();
+});
+
+function makeRowsLinked() {
     $(".clickable-table-row").click(function() {
         window.document.location = $(this).data("href");
     });
     $(".clickable-table-column").click(function() {
         window.document.location = $(this).children().attr("href");
     });
-});
+}
