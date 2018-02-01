@@ -46,3 +46,14 @@ function changeDropZoneHieght(){
     var tablesHeight = $(".tables").height();
     tablesHeight >= $(window).height() ? $('.items-form').height(tablesHeight) : $('.items-form').height('85%');
 }
+
+function addHideEventForIcons(){
+    $(".clickable-table-row").hover(
+        function(){
+        $(this).children(".actions-column").children(".action-icons").show();
+        },
+        function(){
+            $(this).children(".actions-column").children(".action-icons").hide();
+        }
+    );
+}

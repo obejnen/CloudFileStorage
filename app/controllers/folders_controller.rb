@@ -3,6 +3,8 @@ class FoldersController < ApplicationController
     before_action :set_items
     before_action :set_shared, only: [:show_shared]
 
+    require 'aes'
+
     def create
         # new_folder = Folder.new(folder_params)
         # new_folder.parent = @folder
@@ -27,6 +29,15 @@ class FoldersController < ApplicationController
         @items = @items_search.result
     end
 
+    def share_with
+        @user = User.find_by_username(params[:username])
+        @folder = Folder.find(params[:folder])
+        if @user && @folder && has_access(@user, @folder)
+            @user.folders << @folder
+        end
+    end
+
+
     private
 
     def set_shared
@@ -38,7 +49,13 @@ class FoldersController < ApplicationController
     end
 
     def folder_params
-        params.require(:folder).permit(:name).merge(user_id: current_user.id, parent_id: @folder.id)
+        name = params.require(:folder).permit(:name).require(:name)
+        params.require(:folder).permit(:name).merge(user_id: current_user.id, parent_id: @folder.id, encrypted_name: encrypt_name(name))
+    end
+
+    def encrypt_name(name)
+        key = AES.key
+        AES.encrypt(name, key)
     end
 
     def set_items

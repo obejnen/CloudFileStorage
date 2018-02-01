@@ -1,2 +1,3 @@
 $('#items_table').replaceWith('<%=j render "/items/items", folder: @folder, item: @folder.items %>');
-$('#new_item')[0].reset()
+$('#new_item')[0].reset();
+addHideEventForIcons();

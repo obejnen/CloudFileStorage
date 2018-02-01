@@ -7,6 +7,8 @@ class Folder < ApplicationRecord
     has_many :folders
     has_many :items
 
+    require 'aes'
+
 
     def get_path(folder)
         path = ""

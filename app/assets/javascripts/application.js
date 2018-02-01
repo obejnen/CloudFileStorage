@@ -24,11 +24,15 @@ $.turbo.use('turbolinks:load', 'turbolinks:request-start')
 $(document).ready(function(){
     makeRowsLinked();
     changeDropZoneHieght();
+    addHideEventForIcons();
 });
 
 function makeRowsLinked() {
-    $(".clickable-table-row").click(function() {
-        window.document.location = $(this).data("href");
+    $(".clickable-table-row td:not(:last-child)").click(function() {
+        var reference = $(this).data("href");
+        if (reference) {
+            window.document.location = $(this).data("href");
+        }
     });
     $(".clickable-table-column").click(function() {
         window.document.location = $(this).children().attr("href");

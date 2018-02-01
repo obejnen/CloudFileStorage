@@ -1,0 +1,12 @@
+<div id="share-form-folder-<%= folder %>" class="overlay-share">
+    <div class="closebtn">
+        <a href="#" class="closebtn" onclick="closeShareForm(); resetShareForm();">&times;</a>
+    </div>
+    <div class="form-content">
+        <form action="/folder_share_with" accept-charset="UTF-8" method="post" class="form-inline" data-remote="true" id="share-folder">
+            <%= hidden_field_tag(:folder, "#{ folder }", class: 'form-control') %>
+            <%= text_field_tag(:username, "", class: 'form-control', placeholder: "Share with...") %>
+            <%= submit_tag("Share", class: "btn btn-primary", onclick: "closeShareForm()") %>
+        </form>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 <div class="controls">
-    <i class="material-icons" onclick="history.go(-1);return true; window.location.reload()">keyboard_arrow_left</i>
-    <i class="material-icons" onclick="history.go(1);return true; window.location.reload()">keyboard_arrow_right</i>
+    <i class="material-icons" onclick="history.go(-1); return true;">keyboard_arrow_left</i>
+    <i class="material-icons" onclick="history.go(1);return true;">keyboard_arrow_right</i>
     <% if @folder.get_parent %>
         <%= link_to folder_path(@folder.get_parent), class: "icon-link" do %>
             <span class="glyphicon glyphicon-level-up"></span>
@@ -11,3 +11,13 @@
         <%= @folder.get_path(@folder).to_s.html_safe %><br>
     </div>
 </div>
+
+<script>
+    function goBack(){
+        document.location.reload(true);
+    }
+
+    function goForward(){
+        document.location.reload(true);
+    }
+</script>

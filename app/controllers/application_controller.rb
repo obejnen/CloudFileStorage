@@ -12,6 +12,10 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def has_access(user, object)
+    object.owner == current_user && !(object.users.include?(user)) && user != current_user
+  end
+
   def configure_permitted_parameters
     added_attrs = [:username, :email, :password, :password_confirmation, :remember_me]
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs

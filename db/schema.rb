@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180128102827) do
+ActiveRecord::Schema.define(version: 20180131224645) do
 
   create_table "folder_shares", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20180128102827) do
     t.integer "user_id"
     t.integer "folder_id"
     t.integer "parent_id"
+    t.string "encrypted_name"
     t.index ["folder_id"], name: "index_folders_on_folder_id"
     t.index ["parent_id"], name: "index_folders_on_parent_id"
     t.index ["user_id"], name: "index_folders_on_user_id"
@@ -49,6 +50,7 @@ ActiveRecord::Schema.define(version: 20180128102827) do
     t.integer "user_id"
     t.integer "folder_id"
     t.string "file"
+    t.string "encrypted_name"
     t.index ["folder_id"], name: "index_items_on_folder_id"
     t.index ["user_id"], name: "index_items_on_user_id"
   end

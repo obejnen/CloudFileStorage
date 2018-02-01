@@ -1,2 +1,9 @@
 <%= render "form" %>
-<%= render "/files/files_table" %>
+<%= render "items/form" %>
+<div class="file-manager">
+    <%= render "controls" %>
+    <div class="tables">
+        <%= render "folders" %>
+        <%= render "items/items" %>
+    </div>
+</div>

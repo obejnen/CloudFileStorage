@@ -1,0 +1,12 @@
+<div id="share-form-item-<%= item %>" class="overlay">
+    <div class="closebtn">
+        <a href="#" class="closebtn" onclick="closeShareForm(); resetShareForm();">&times;</a>
+    </div>
+    <div class="form-content">
+        <%= form_tag('/item_share_with', method: :post, html: { id: "share_form_tag"}) do %>
+            <%= hidden_field_tag :item, "#{item }" %>
+            <%= text_field_tag :username, "", class: 'form-control', placeholder: "Share with..." %>
+            <%= submit_tag "Share", class: "btn btn-primary", onclick: "closeShareForm()" %>
+        <% end %>
+    </div>
+</div>
