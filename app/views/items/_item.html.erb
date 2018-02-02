@@ -1,4 +1,4 @@
-<% cache item do %>
+<%# cache item do %>
     <tr class="clickable-table-row item-row">
         <td class="icon-column">
             <span class="glyphicon glyphicon-file"></span>
@@ -14,16 +14,22 @@
         </td>
         <td class="actions-column">
             <div class="action-icons">
-                <a href="<%= item.file.url %>" download="<%= item.file.model.name %>">
+                <a href="<%= item.file.url %>" download=>
                     <i class="material-icons">file_download</i>
                 </a>
                 <i class="material-icons" onclick='openItemShareForm(<%= item.id %>)' id="share-item-<%= item.id %>">share</i>
                 <i class="material-icons">edit</i>
-                <%= link_to item_path(item), method: :delete do %>
-                    <i class="material-icons">delete</i>
+                <% if current_page?(root_path) %>
+                    <%= link_to item_path(item), method: :delete do %>
+                        <i class="material-icons">delete</i>
+                    <% end %>
+                <% else %>
+                    <%= link_to folder_item_path(item), method: :delete do %>
+                        <i class="material-icons">delete</i>
+                    <% end %>
                 <% end %>
             </div>
         </td>
     </tr>
-<% end %>
+<%# end %>
 <%= render partial: "items/share_form", locals: { item: item.id } %>

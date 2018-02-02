@@ -1,0 +1,12 @@
+<div id="rename-form-folder-<%= folder %>" class="overlay-share">
+        <div class="closebtn">
+            <a href="#" class="closebtn" onclick="closeRenameForm(); resetRenameForm();">&times;</a>
+        </div>
+        <div class="form-content">
+            <form action="/folder_rename" accept-charset="UTF-8" method="post" class="form-inline" data-remote="true" id="rename-folder">
+                <%= hidden_field_tag(:folder, "#{ folder }", class: 'form-control') %>
+                <%= text_field_tag(:foldername, "", class: 'form-control', placeholder: "Folder name") %>
+                <%= submit_tag("Rename", class: "btn btn-primary", onclick: "closeRenameForm()") %>
+            </form>
+        </div>
+    </div>

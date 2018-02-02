@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   post "/item_share_with", to: "items#share_with"
   post "/folder_share_with", to: "folders#share_with"
+  post "/folder_rename", to: "folders#edit"
+  post "/item_rename", to: "items#edit"
   resources :items
   mount ActionCable.server => '/cable'
 

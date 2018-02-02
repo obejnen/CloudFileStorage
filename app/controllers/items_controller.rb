@@ -1,15 +1,8 @@
 class ItemsController < ApplicationController
-    before_action :set_item, only: [:destroy]
-    before_action :set_folder, except: [:destroy]
+    # before_action :set_item, only: [:destroy, :check_for_access]
+    before_action :set_folder, except: [:destroy, :check_for_access]
     before_action :set_items, except: [:destroy]
     
-    # def create
-    #     files = params.require(:item).permit(file: [])[:file]
-    #     files.each do |file|
-    #         @folder.items.create(name: file.original_filename, user_id: current_user.id, folder_id: @folder.id, file: file)
-    #     end
-    # end
-
     def create
         @new_item = Item.new(item_params)
         @old_item = find_replace(@new_item)
@@ -24,8 +17,17 @@ class ItemsController < ApplicationController
     end
 
     def destroy
-        @item.destroy
-        redirect_back fallback_location: root_path
+        if params.has_key?(:folder_id)
+            @item = Item.find(params[:folder_id])
+            @folder = Folder.find_by_id(params[:id]) if params.has_key?(:id)            
+        else
+            @item = Item.find(params[:id])
+            @folder = current_user.own_folders.first
+        end
+        # @folder = Folder.find(params[:folder_id]) if params.has_key?(:folder_id)      
+        if has_access(@item, @folder)
+            @item.destroy
+        end
     end
 
     def share_with
@@ -64,11 +66,15 @@ class ItemsController < ApplicationController
 
     def set_folder
         @folder = current_user.own_folders.first
-        @folder = Folder.find(params[:id]) if params.has_key?(:id)
+        @folder = Folder.find_by_id(params[:id]) if params.has_key?(:id)
         @folder = Folder.find(params[:folder_id]) if params.has_key?(:folder_id)
     end
 
     def set_item
         @item = Item.find(params[:id])
+    end
+
+    def has_access(item, folder)
+        item.owner == current_user || folder.owner == current_user
     end
 end

@@ -1,24 +1,25 @@
 <% cache folder do %>
-<%= render "folders/share_form", folder: folder.id %>
-    <tr class="clickable-table-row folder-row" data-href="<%= folder_path(folder) %>">
-        <td class="icon-column">
-            <span class="glyphicon glyphicon-folder-open"></span>
-        </td>
-        <td class="name-column">
-            <%= folder.name %>
-        </td>
-        <td class="owner-column">
-            <%= folder.owner.username %>
-        </td>
-        <td class="date-column">
-            <%= folder.created_at.strftime('%d %B %Y') %>
-        </td>
-        <td class="actions-column">
-            <div class="action-icons">
-                <i class="material-icons" onclick='openFolderShareForm(<%= folder.id %>)' id="share-folder-<%= folder.id %>" style="z-index: 5">share</i>
-                <i class="material-icons">edit</i>
-                <i class="material-icons">delete</i>
-            </div>
-        </td>
-    </tr>
+<tr class="clickable-table-row folder-row" data-href="<%= folder_path(folder) %>">
+    <td class="icon-column">
+        <span class="glyphicon glyphicon-folder-open"></span>
+    </td>
+    <td class="name-column">
+        <%= folder.name %>
+    </td>
+    <td class="owner-column">
+        <%= folder.owner.username %>
+    </td>
+    <td class="date-column">
+        <%= folder.created_at.strftime('%d %B %Y') %>
+    </td>
+    <td class="actions-column" id="actionClmn">
+        <div class="action-icons" id="actionIcons">
+            <i class="material-icons" onclick='openFolderShareForm(<%= folder.id %>)' id="share-folder-<%= folder.id %>" style="z-index: 5">share</i>
+            <i class="material-icons" onclick="openRenameFolderForm(<%= folder.id %>)" id="rename-folder-<%= folder.id %>" style="z-index: 5">edit</i>
+            <i class="material-icons">delete</i>
+        </div>
+    </td>
+</tr>
 <% end %>
+<%= render "folders/share_form", folder: folder.id %>
+<%= render "folders/rename_form", folder: folder.id %>

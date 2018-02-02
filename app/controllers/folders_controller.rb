@@ -7,13 +7,19 @@ class FoldersController < ApplicationController
     require 'aes'
 
     def create
-        # new_folder = Folder.new(folder_params)
-        # new_folder.parent = @folder
-        # @folder.folders << new_folder
-        @folder.folders.create(folder_params)
+        new_folder = Folder.new(folder_params)
+        new_folder.parent = @folder
+        unless @folder.folders.find_by_name(new_folder.name)
+            @folder.folders.create(folder_params)
+        end
+            # @folder.folders.create(folder_params)
     end
 
-    def index
+    # def index
+    # end
+
+    def destroy
+        destroy_inner(@folder)
     end
 
     def show
@@ -35,11 +41,44 @@ class FoldersController < ApplicationController
         @folder = Folder.find(params[:folder])
         if @user && @folder && has_access(@user, @folder)
             @user.folders << @folder
+            share_inner(@user, @folder)
+        end
+    end
+
+    def edit
+        @folder_to_rename = Folder.find(params[:folder])
+        @folder = @folder_to_rename.get_parent
+        @same_folder = @folder.folders.find_by_name(params[:foldername])
+        if @same_folder
+            @same_folder.items << @folder_to_rename.items
+            @folder_to_rename.delete
+        else
+            @folder_to_rename.update(name: params[:foldername])
         end
     end
 
 
     private
+
+    def destroy_inner(folder)
+        folder.folders.each do |f|
+            f.destroy_inner(f)
+        end
+        folder.items.each do |i|
+            i.delete
+        end
+        folder.delete
+    end
+
+    def share_inner(user, folder)
+        folder.folders.each do |f|
+            user.folders << f
+            share_inner(user, f)
+        end
+        folder.items.each do |i|
+            user.items << i
+        end
+    end
 
     def check_for_access
         unless (@folder.owner == current_user || @folder.users.include?(current_user))

@@ -1,10 +1,11 @@
 class Folder < ApplicationRecord
     after_create_commit { RenderFoldersJob.perform_later self }
+    validates :name, presence: true
     has_many :folder_shares
     has_many :users, through: :folder_shares
     belongs_to :owner, class_name: "User", foreign_key: "user_id"
     has_one :parent, class_name: "Folder", foreign_key: "parent_id"
-    has_many :folders
+    has_many :folders, dependent: :destroy
     has_many :items
 
     require 'aes'
