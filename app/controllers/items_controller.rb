@@ -11,8 +11,12 @@ class ItemsController < ApplicationController
     # end
 
     def create
-        @item = Item.new(item_params)
-        if @item.save!
+        @new_item = Item.new(item_params)
+        @old_item = find_replace(@new_item)
+        if @new_item.save!
+            if @old_item
+                @old_item.delete
+            end
             respond_to do |format|
                 format.json{ render :json => @item }
             end
@@ -33,6 +37,10 @@ class ItemsController < ApplicationController
     end
 
     private
+
+    def find_replace(item)
+        @folder.items.find_by_name(item.name)
+    end
     
     def item_params
         @filename = params[:file].original_filename

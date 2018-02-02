@@ -51,7 +51,6 @@ function disableButton(){
 }
 
 function startUpload(){
-    console.log("ot suda")
     if(dialogList.length == 0){
         if(dropzone.files.length == 1){
             dropzone.processFile(dropzone.files[0]);
@@ -104,7 +103,6 @@ function submitAllDialogsAsCopy(){
 function removeLastDialog(){
     index = dialogList.length - 1
     dialogList.splice(index, 1);
-    // console.log(dialogList.length)
 }
 
 function showLastDialog(){
@@ -147,9 +145,7 @@ function showFileActionDialog(filename){
                 replaceAll();
             },
             "Create copy":  function() {
-                console.log(filename)
                 createCopy(filename);
-                // removeLastDialog();
                 dialog.dialog('close');
             },
             "Copy all": function(){
@@ -202,7 +198,6 @@ function ignoreFile(filename){
 }
 
 function createCopy(filename){
-    // console.log(filename)
     for(var i = 0; i < dropzone.files.length; i++){
         if(dropzone.files[i].name == filename){
             nameParts = filename.split(".")
