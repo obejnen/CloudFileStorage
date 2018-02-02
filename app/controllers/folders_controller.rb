@@ -11,12 +11,11 @@ class FoldersController < ApplicationController
         new_folder.parent = @folder
         unless @folder.folders.find_by_name(new_folder.name)
             @folder.folders.create(folder_params)
+            @folder.folders.last.users << @folder.users
+            # Folder.find(folder_params).users << @folder.users
         end
             # @folder.folders.create(folder_params)
     end
-
-    # def index
-    # end
 
     def destroy
         destroy_inner(@folder)
@@ -39,7 +38,7 @@ class FoldersController < ApplicationController
     def share_with
         @user = User.find_by_username(params[:username])
         @folder = Folder.find(params[:folder])
-        if @user && @folder && has_access(@user, @folder)
+        if @user && @folder && @folder.owner == current_user && current_user != @user
             @user.folders << @folder
             share_inner(@user, @folder)
         end
@@ -50,7 +49,7 @@ class FoldersController < ApplicationController
         @folder = @folder_to_rename.get_parent
         @same_folder = @folder.folders.find_by_name(params[:foldername])
         if @same_folder
-            @same_folder.items << @folder_to_rename.items
+            @same_folder.items.merge(@folder_to_rename.items)
             @folder_to_rename.delete
         else
             @folder_to_rename.update(name: params[:foldername])
@@ -81,7 +80,7 @@ class FoldersController < ApplicationController
     end
 
     def check_for_access
-        unless (@folder.owner == current_user || @folder.users.include?(current_user))
+        if !(@folder.owner == current_user || @folder.users.include?(current_user))
             not_found
         end
     end

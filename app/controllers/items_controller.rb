@@ -3,6 +3,13 @@ class ItemsController < ApplicationController
     before_action :set_folder, except: [:destroy, :check_for_access]
     before_action :set_items, except: [:destroy]
     
+    def download
+        @item = Item.find(params[:item_id])
+        send_file(@item.file.url,
+              :disposition => 'attachment',
+              :url_based_filename => false)
+    end
+
     def create
         @new_item = Item.new(item_params)
         @old_item = find_replace(@new_item)

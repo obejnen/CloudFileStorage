@@ -1,0 +1,12 @@
+<div id="rename-form-item-<%= item %>" class="overlay-share">
+        <div class="closebtn">
+            <a href="#" class="closebtn" onclick="closeRenameForm(); resetRenameForm();">&times;</a>
+        </div>
+        <div class="form-content">
+            <form action="/item_rename" accept-charset="UTF-8" method="post" class="form-inline" data-remote="true" id="rename-item">
+                <%= hidden_field_tag(:item, "#{ item }", class: 'form-control') %>
+                <%= text_field_tag(:itemname, "", class: 'form-control', placeholder: "Item name") %>
+                <%= submit_tag("Rename", class: "btn btn-primary", onclick: "closeRenameForm()") %>
+            </form>
+        </div>
+    </div>
