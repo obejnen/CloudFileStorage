@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
     renderer.render(*args)
   end
 
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
+
   protected
 
   def has_access(user, object)

@@ -50,7 +50,7 @@ function changeDropZoneHieght(){
 function addHideEventForIcons(){
     $(".clickable-table-row").hover(
         function(){
-        $(this).children(".actions-column").children(".action-icons").show();
+            $(this).children("td.actions-column").children("div.action-icons").show();
         },
         function(){
             $(this).children(".actions-column").children(".action-icons").hide();

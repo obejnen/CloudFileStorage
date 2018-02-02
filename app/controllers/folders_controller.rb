@@ -2,6 +2,7 @@ class FoldersController < ApplicationController
     before_action :set_folder #, only: [:show, :create, :new, :index]
     before_action :set_items
     before_action :set_shared, only: [:show_shared]
+    before_action :check_for_access, only: [:show]
 
     require 'aes'
 
@@ -39,6 +40,12 @@ class FoldersController < ApplicationController
 
 
     private
+
+    def check_for_access
+        unless (@folder.owner == current_user || @folder.users.include?(current_user))
+            not_found
+        end
+    end
 
     def set_shared
         @folders_search = current_user.folders.ransack(params[:q])

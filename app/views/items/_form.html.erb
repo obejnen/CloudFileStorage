@@ -1,8 +1,9 @@
 <div class="items-form">
-    <%= form_for [@folder, @item, Item.new], html: { class: "dropzone", id: "item-dropzone" }, remote: true do |f| %>
+    <button class="btn btn-primary disabled" id="submit_upload_btn">Upload</button>
+    <%= form_for [@folder, @item, Item.new], html: { class: "dropzone", id: "itemDropzone" }, remote: true do |f| %>
         <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
         <div class="fallback">
             <%= f.file_field :file, multiple: true %>
         </div>
-    <% end %>    
+    <% end %>
 </div>

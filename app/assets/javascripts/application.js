@@ -11,7 +11,7 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery-ui
+//= require jquery-ui/widgets/dialog
 //= require jquery.turbolinks
 //= require rails-ujs
 //= require bootstrap-sprockets
@@ -28,12 +28,13 @@ $(document).ready(function(){
 });
 
 function makeRowsLinked() {
-    $(".clickable-table-row td:not(:last-child)").click(function() {
-        var reference = $(this).data("href");
+    $('.clickable-table-row').children('.name-column').click(function() {
+        var reference = $(this).parent().data("href");
         if (reference) {
-            window.document.location = $(this).data("href");
+            window.document.location = reference;
         }
     });
+    
     $(".clickable-table-column").click(function() {
         window.document.location = $(this).children().attr("href");
     });
