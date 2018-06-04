@@ -1,35 +1,33 @@
-<%# cache item do %>
-    <tr class="clickable-table-row item-row">
-        <td class="icon-column">
-            <span class="glyphicon glyphicon-file"></span>
-        </td>
-        <td class="name-column" name="<%= item.name %>">
-            <%= item.name %>
-        </td>
-        <td class="owner-column">
-            <%= item.owner.username %>
-        </td>
-        <td class="date-column">
-            <%= item.created_at.strftime('%d %B %Y') %>
-        </td>
-        <td class="actions-column">
-            <div class="action-icons">
-                <a href="<%= item.file.url %>" download>
-                    <i class="material-icons">file_download</i>
-                </a>
-                <i class="material-icons" onclick='openItemShareForm(<%= item.id %>)' id="share-item-<%= item.id %>">share</i>
-                <i class="material-icons">edit</i>
-                <% if current_page?(root_path) %>
-                    <%= link_to item_path(item), method: :delete do %>
-                        <i class="material-icons">delete</i>
-                    <% end %>
-                <% else %>
-                    <%= link_to folder_item_path(item), method: :delete do %>
-                        <i class="material-icons">delete</i>
-                    <% end %>
+<tr class="clickable-table-row item-row">
+    <td class="icon-column">
+        <span class="glyphicon glyphicon-file"></span>
+    </td>
+    <td class="name-column" name="<%= item.name %>">
+        <%= item.name %>
+    </td>
+    <td class="owner-column">
+        <%= item.owner.username %>
+    </td>
+    <td class="date-column">
+        <%= item.created_at.strftime('%d %B %Y') %>
+    </td>
+    <td class="actions-column">
+        <div class="action-icons">
+            <a href="<%= item.file.url %>" download>
+                <i class="material-icons">file_download</i>
+            </a>
+            <i class="material-icons" onclick='openItemShareForm(<%= item.id %>)' id="share-item-<%= item.id %>">share</i>
+            <i class="material-icons">edit</i>
+            <% if current_page?(root_path) %>
+                <%= link_to item_path(item), method: :delete do %>
+                    <i class="material-icons">delete</i>
                 <% end %>
-            </div>
-        </td>
-    </tr>
-<%# end %>
+            <% else %>
+                <%= link_to folder_item_path(item), method: :delete do %>
+                    <i class="material-icons">delete</i>
+                <% end %>
+            <% end %>
+        </div>
+    </td>
+</tr>
 <%= render partial: "items/share_form", locals: { item: item.id } %>
